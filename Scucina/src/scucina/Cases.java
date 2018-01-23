@@ -14,8 +14,8 @@ public class Cases {
     private boolean peutMarcher;
     private Outils outils; 
     private boolean porte;
-    private int x = 10;
-    private int y = 10;
+    private int x = 100;
+    private int y = 100;
 
     public int getX() {
         return x;

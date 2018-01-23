@@ -75,10 +75,11 @@ public class JeuTuto1 implements JeuAbstract{
                 this.plateau[4][5] = new Cases(true,"");
                 this.plateau[5][5] = new Cases(false,"");
                 // On donne les 2 cases de chaque côté de la porte. 
-                this.portes[0][0]=this.plateau[3][4];
-                this.portes[0][0].setPorte(true);
-                this.portes[0][1]=this.plateau[4][4];
-                this.portes[0][1].setPorte(true);
+                // On supprime la porte pour des raisons de game design
+                //this.portes[0][0]=this.plateau[3][4];
+                //this.portes[0][0].setPorte(true);
+                //this.portes[0][1]=this.plateau[4][4];
+                //this.portes[0][1].setPorte(true);
                 
                 print();
         }
