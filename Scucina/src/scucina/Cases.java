@@ -5,6 +5,8 @@
  */
 package scucina;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author vincentboulanger
@@ -12,7 +14,7 @@ package scucina;
 public class Cases {
     
     private boolean peutMarcher;
-    private Outils outils; 
+    private ArrayList<Outils> outils = new ArrayList<Outils>(); 
     private boolean porte;
     private int x = 100;
     private int y = 100;
@@ -41,7 +43,7 @@ public class Cases {
         }
         else{
             Outils o = new Outils(outils); 
-            this.outils=o;
+            this.outils.add(o);
         }
         this.joueur = false;
         
@@ -63,12 +65,19 @@ public class Cases {
         this.peutMarcher = peutMarcher;
     }
 
-    public Outils getOutils() {
+    public ArrayList<Outils> getOutils() {
         return outils;
     }
 
-    public void setOutils(Outils outils) {
+    public void setOutils(ArrayList<Outils> outils) {
         this.outils = outils;
+    }
+
+
+
+    public void addOutils(String o){
+        Outils out = new Outils(o);
+        this.outils.add(out);
     }
 
     public boolean isPorte() {

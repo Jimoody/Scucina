@@ -25,11 +25,10 @@ public class Scucina {
         
            //on cree un jeu
 		//JeuTuto1 j = new JeuTuto1();
-                JeuPersonnage j = new JeuPersonnage();
+                Jeu j = new Jeu();
 		
 		//on cree une interface graphique
-                    //DessinAbstract d=new DessinTuto1(j);	
-                    DessinAbstract d = new DessinPJ(j);
+                DessinAbstract d = new DessinJeu(j);
 				
 		//on cree le moteur et on lance le jeu
 		MoteurGraphique m=new MoteurGraphique(j, d);
@@ -37,8 +36,8 @@ public class Scucina {
 		//on lance le moteur
 		int fps=100;
                 // 600 x 400
-		int tailleX=314;
-		int tailleY=428;
+		int tailleX=414; //map = 314
+		int tailleY=528; //map = 428
 		m.lancerJeu(tailleX, tailleY, fps);
     }
     

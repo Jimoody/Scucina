@@ -1,97 +1,125 @@
-/*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
 package scucina;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 import moteurJeu.moteur.DessinAbstract;
+import moteurJeu.sprite.Sprites;
 
-
-/**
- *
- * @author vincentboulanger
- */
 public class DessinTuto1 implements DessinAbstract {
     
     JeuTuto1 jeu;
-    Cases[][] cases;
-    String nom_img = "map_tuto1";
-    String chemin_map = "/img/map_tuto1.png";
-    
     
     public DessinTuto1(JeuTuto1 j) {
         this.jeu = j;
-        this.cases= jeu.getPlateau();
+        
+        // charger sprites
+        Sprites.chargerImage("map-tuto1", "img/map_tuto1.png");
+        Sprites.chargerImage("personnage", "img/perso.png");
+        Sprites.chargerFeuille("perso", "img/trainer.png",3, 4);
+        Sprites.chargerFeuille("arrow", "img/arrows.png", 12, 8);
     }
     
     @Override
     public void dessiner(BufferedImage image) {
-        // on recupere le graphics
-        Graphics2D g = (Graphics2D) image.getGraphics();
+        Graphics2D g=(Graphics2D)image.getGraphics();
         
-        // on dessine un rectangle vert
-        g.setColor(Color.GREEN);
+        int x=(int)this.jeu.x;
+        int y=(int)this.jeu.y;
+        int map_x = this.jeu.map_x;
+        int map_y = this.jeu.map_x;
+        ArrayList<String> touche = this.jeu.touche;
         
-//        for (int i = 0; i < 6; i++) {
-//            for (int j = 0; j < 6; j++) {
-//                int month = 0 + (int)(Math.random() * ((6) + 1));
-//                switch (month) {
-//                    case 1:  g.setColor(Color.GREEN);
-//                    break;
-//                    case 2:  g.setColor(Color.YELLOW);
-//                    break;
-//                    case 3:  g.setColor(Color.GRAY);
-//                    break;
-//                    case 4:  g.setColor(Color.blue);
-//                    break;
-//                    case 5:  g.setColor(Color.red);
-//                    break;
-//                    case 6:  g.setColor(Color.magenta);
-//                    break;
-//                    case 0:  g.setColor(Color.cyan);
-//                    break;
-//                }   
-//                //g.fillRect(jeu.getPlateau()[j][i].getX(), jeu.getPlateau()[j][i].getY(), i*11, j*11);
-//                g.fillRect(i*15, j*15, jeu.getPlateau()[j][i].getX(), jeu.getPlateau()[j][i].getY());
-//        
-               // fillRect(int x, int y, int width, int height)
-               
+        Sprites.dessiner(g, "map-tuto1", map_x , map_y);
+        String chaine="";
+        if (this.jeu.direction==0) // haut
+            chaine="perso_1_0";
+        if (this.jeu.direction==1) // bas
+            chaine="perso_1_3";
+        if (this.jeu.direction==2) // gauche
+            chaine="perso_1_1";
+        if (this.jeu.direction==3) // droite
+            chaine="perso_1_2";
         
-        g.fillRect(100, 100, 300, 100);
-        //g.fillRect(jeu.getPlateau()[1][1].getX(), jeu.getPlateau()[1][1].getY(), cases[1][1].getX(), cases[1][1].getY());
+        Sprites.dessinerCentre(g, chaine, x, y);
         
-        // on dessine les cercles au coin
-        g.setColor(Color.BLUE);
-        int t = 10;
-        g.drawOval(100 - t, 100 - t, 2 * t, 2 * t);
-        g.drawOval(100 - t, 200 - t, 2 * t, 2 * t);
-        g.drawOval(400 - t, 100 - t, 2 * t, 2 * t);
-        g.drawOval(400 - t, 200 - t, 2 * t, 2 * t);
-        
-        // on dessine la souris
-        g.setColor(this.jeu.c);
-        g.fillOval(this.jeu.sx - t, this.jeu.sy - t, 2 * t, 2 * t);
-        
-        // on ecrit dans le rectangle
         g.setColor(Color.BLACK);
-        g.drawString("Cliquez ici", 150, 155);
-        g.dispose();
         
+        int img_x = 30;
+        int img_y = 350;
+        int a = 0;
+        boolean ligne = true;
+        boolean ligne1 = true;
+        boolean ligne2 = true;
+        if(!touche.isEmpty()){
+            for (int i = 0; i < touche.size(); i++) {
+                String get = touche.get(i);
+                if(i>7 && i <= 15 && ligne){
+                    a = 8;
+                    img_y = img_y + 50;
+                    img_x = 30;
+                    ligne = false;
+                }
+                else if (i>15 && i <= 23 && ligne1){
+                    a=16;
+                    img_y = img_y + 50;
+                    img_x = 30;
+                    ligne1 = false;
+                }
+                else if (i>23 && ligne2){
+                    a=24;
+                    img_y = img_y + 50;
+                    img_x = 30;
+                    ligne2 = false;
+                }
+                switch (get) {
+                    case "Droite":  Sprites.dessinerCentre(g, "arrow_10_2", img_x+((i-a)*50), img_y);
+                    break;
+                    case "Gauche":  Sprites.dessinerCentre(g, "arrow_10_1", img_x+((i-a)*50), img_y);
+                    break;
+                    case "Bas":  Sprites.dessinerCentre(g, "arrow_10_0", img_x+((i-a)*50), img_y);
+                    break;
+                    case "Haut":  Sprites.dessinerCentre(g, "arrow_10_3", img_x+((i-a)*50), img_y);
+                    break;
+                    default: System.out.println("NOPE");
+                    break;
+                }
+            }
+        }
+        //g.drawString(this.jeu.touche.toString(), 10, 400);
         
-        
-        //jeu.print();
+        int j = touche.size();
+//        for (int i = 0; i < j; i++) {
+//            String get = touche.get(i);
+//            switch (get) {
+//                case "Droite":  Sprites.dessinerCentre(g, "arrow_10_2", 200, 200);
+//                break;
+//                case "Gauche":  Sprites.dessinerCentre(g, "arrow_10_1", 230, 230);;
+//                break;
+//                case "Bas":  Sprites.dessinerCentre(g, "arrow_10_0", 210, 210);
+//                break;
+//                case "Haut":  Sprites.dessinerCentre(g, "arrow_10_3", 240, 240);
+//                break;
+//                default: System.out.println("NOPE");
+//                break;
+//            }
+//        }
+
+//double vit=(int)(this.jeu.v*100)/100.;
+//g.drawString("vit:"+vit,50,10);
+
+/*
+g.setColor(Color.BLUE);
+int dx=(int)this.jeu.objectifx;
+int dy=(int)this.jeu.objectify;
+int r=(int)this.jeu.rayon;
+g.drawOval(dx-r,dy-r,2*r,2*r);
+*/
+
+
+g.dispose();
     }
-    
     
 }
