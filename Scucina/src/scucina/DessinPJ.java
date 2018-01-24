@@ -28,7 +28,6 @@ public class DessinPJ implements DessinAbstract {
 		int y=(int)this.jeu.y;
                 int map_x = this.jeu.map_x;
                 int map_y = this.jeu.map_x;
-		g.setColor(Color.PINK);
 		Sprites.dessiner(g, "map-tuto1", map_x , map_y);
                 String chaine="";
 			if (this.jeu.direction==0) // haut
@@ -41,8 +40,9 @@ public class DessinPJ implements DessinAbstract {
 				chaine="perso_1_2";
 			
                 Sprites.dessinerCentre(g, chaine, x, y);
-
+                
 		g.setColor(Color.BLACK);
+                g.drawString(this.jeu.touche.toString(), 10, 400);
 		//double vit=(int)(this.jeu.v*100)/100.;
 		//g.drawString("vit:"+vit,50,10);
 		

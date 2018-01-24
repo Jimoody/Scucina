@@ -3,6 +3,8 @@ package scucina;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import moteurJeu.moteur.CClavier;
 import moteurJeu.moteur.CSouris;
@@ -26,6 +28,9 @@ public class JeuPersonnage implements JeuAbstract {
     int bon_move = 0;
     int mauvaise_move;
     boolean lire=true;
+    int tps = 1000;
+    
+    boolean sequence = false;
     /*
     0 = face
     1 = dos
@@ -116,46 +121,74 @@ public class JeuPersonnage implements JeuAbstract {
         
         // decale le personnage en fonction des touches
         if (clavier.getTyped(KeyEvent.VK_LEFT)) {
-            this.allerGauche(true);
+            this.allerGauche(true, false);
         }
         
         if (clavier.getTyped(KeyEvent.VK_RIGHT)) {
-            this.allerDroite(true);
+            this.allerDroite(true, false);
         }
         
         if (clavier.getTyped(KeyEvent.VK_UP)) {
-            this.allerHaut(true);
+            this.allerHaut(true, false);
         }
         
         if (clavier.getTyped(KeyEvent.VK_DOWN)) {
-            this.allerBas(true);
+            this.allerBas(true, false);
         }
-        if (clavier.getTyped(KeyEvent.VK_BACK_SPACE)) {
+        if (clavier.getTyped(KeyEvent.VK_SPACE)) {
             // JOUER LA SEQUENCE !
-            if (lire) {
-                System.out.println("Je lis la séquence ?");
-                System.out.println(touche);
-                for (int i = 0; i < touche.size(); i++) {
-                    System.out.println("Ca, c'est i ? " + i);
-                    String get = touche.get(i);
-                    switch (get) {
-                        case "Droite":  this.allerDroite(false);
-                        break;
-                        case "Gauche":  this.allerGauche(false);
-                        break;
-                        case "Bas":  this.allerBas(false);
-                        break;
-                        case "Haut":  this.allerHaut(false);
-                        break;
-                        default: System.out.println("NOPE");
-                        break;
-                    }
-                }
-                System.out.println("j'ai lu");
-                lire = false;
+            //System.out.println("Je lis la séquence ?");
+            sequence = true;
+            /*
+            int j = touche.size();
+            for (int i = 0; i < j; i++) {
+            System.out.println("Ca, c'est i ? " + i);
+            System.out.println(touche);
+            String get = touche.remove(0);
+            switch (get) {
+            case "Droite":  this.allerDroite(false, true);
+            break;
+            case "Gauche":  this.allerGauche(false, true);
+            break;
+            case "Bas":  this.allerBas(false, true);
+            break;
+            case "Haut":  this.allerHaut(false, true);
+            break;
+            default: System.out.println("NOPE");
+            break;
             }
+            try {
+            Thread.sleep(tps);
+            } catch (InterruptedException ex) {
+            Logger.getLogger(JeuPersonnage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            */
+            //System.out.println("j'ai lu");
         }
-        
+        if (sequence){
+            if(!touche.isEmpty()){
+                String get = touche.remove(0);
+                switch (get) {
+                    case "Droite":  this.allerDroite(false, true);
+                    break;
+                    case "Gauche":  this.allerGauche(false, true);
+                    break;
+                    case "Bas":  this.allerBas(false, true);
+                    break;
+                    case "Haut":  this.allerHaut(false, true);
+                    break;
+                    default: System.out.println("NOPE");
+                    break;
+                }
+                try {
+                    Thread.sleep(tps);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(JeuPersonnage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else sequence = false;
+        }
         // si on arrive � la fin
         /*
         double dx = this.x - this.objectifx;
@@ -167,14 +200,15 @@ public class JeuPersonnage implements JeuAbstract {
         return ("fin");
         }
         */
+        
         return ("PJ");
     }
     
-    public void allerDroite(boolean add){
+    public void allerDroite(boolean add, boolean dep){
         t = "Droite";
         //System.out.println("Droite");
         //System.out.println("mon x est de : "+ this.personnage_x);
-        if (this.personnage_x-1 < 5 && this.plateau[personnage_x+1][personnage_y].isPeutMarcher()  ){
+        if (this.personnage_x-1 < 5 && this.plateau[personnage_x+1][personnage_y].isPeutMarcher() && dep ){
             //System.out.println("Droite1");
             this.x = this.x + v-10;
             this.plateau[this.personnage_x][this.personnage_y].setJoueur(false);
@@ -183,21 +217,34 @@ public class JeuPersonnage implements JeuAbstract {
             if (this.x > 314)
                 this.x = 314-this.largeur_case;
             this.direction=3;
-            this.moveReussi(t);
+            this.moveReussi(t,dep);
+        }
+        else if (this.personnage_x-1 < 5 && this.plateau[personnage_x+1][personnage_y].isPeutMarcher() && !dep ){
+            //System.out.println("Droite1");
+            /*
+            this.x = this.x + v-10;
+            this.plateau[this.personnage_x][this.personnage_y].setJoueur(false);
+            this.personnage_x++;
+            this.plateau[this.personnage_x][this.personnage_y].setJoueur(true);
+            if (this.x > 314)
+            this.x = 314-this.largeur_case;
+            this.direction=3;
+            */
+            this.moveReussi(t,dep);
         }
         else{
             System.out.println("Je ne peux pas y aller");
             this.score = score-3;
         }
         if(add)
-        this.touche.add(t);
+            this.touche.add(t);
     }
     
-    public void allerHaut(boolean add){
+    public void allerHaut(boolean add, boolean dep){
         t = "Haut";
         //System.out.println("Haut");
         //System.out.println("mon y est de : "+ this.personnage_y);
-        if ( this.personnage_y-1 > -1 && this.plateau[personnage_x][personnage_y-1].isPeutMarcher()){
+        if ( this.personnage_y-1 > -1 && this.plateau[personnage_x][personnage_y-1].isPeutMarcher() && dep){
             //System.out.println("Haut1");
             this.y = this.y - v;
             this.plateau[this.personnage_x][this.personnage_y].setJoueur(false);
@@ -206,21 +253,34 @@ public class JeuPersonnage implements JeuAbstract {
             if (this.y < 0)
                 this.y = 0+this.hauteur_case;
             this.direction=1;
-            this.moveReussi(t);
+            this.moveReussi(t,dep);
+        }
+        else if ( this.personnage_y-1 > -1 && this.plateau[personnage_x][personnage_y-1].isPeutMarcher() && !dep){
+            //System.out.println("Haut1");
+            /*
+            this.y = this.y - v;
+            this.plateau[this.personnage_x][this.personnage_y].setJoueur(false);
+            this.personnage_y--;
+            this.plateau[this.personnage_x][this.personnage_y].setJoueur(true);
+            if (this.y < 0)
+            this.y = 0+this.hauteur_case;
+            this.direction=1;
+            */
+            this.moveReussi(t,dep);
         }
         else{
             System.out.println("Je ne peux pas y aller");
             this.score = score-3;
         }
         if(add)
-        this.touche.add(t);
+            this.touche.add(t);
     }
     
-    public void allerBas(boolean add){
+    public void allerBas(boolean add, boolean dep){
         t = "Bas";
         //System.out.println("Bas");
         //System.out.println("mon y est de : "+ this.personnage_y);
-        if ((this.personnage_y < 5) && this.plateau[personnage_x][personnage_y+1].isPeutMarcher()){
+        if ((this.personnage_y < 5) && this.plateau[personnage_x][personnage_y+1].isPeutMarcher() && dep){
             //System.out.println("Bas1");
             this.y = this.y + v;
             this.plateau[this.personnage_x][this.personnage_y].setJoueur(false);
@@ -229,21 +289,34 @@ public class JeuPersonnage implements JeuAbstract {
             if (this.y > 328)
                 this.y = 328-this.hauteur_case;
             this.direction=0;
-            this.moveReussi(t);
+            this.moveReussi(t,dep);
+        }
+        else if((this.personnage_y < 5) && this.plateau[personnage_x][personnage_y+1].isPeutMarcher() && !dep){
+            //System.out.println("Bas1");
+            /*
+            this.y = this.y + v;
+            this.plateau[this.personnage_x][this.personnage_y].setJoueur(false);
+            this.personnage_y++;
+            this.plateau[this.personnage_x][this.personnage_y].setJoueur(true);
+            if (this.y > 328)
+            this.y = 328-this.hauteur_case;
+            this.direction=0;
+            */
+            this.moveReussi(t,dep);
         }
         else{
             System.out.println("Je ne peux pas y aller");
             this.score = score-3;
         }
         if(add)
-        this.touche.add(t);
+            this.touche.add(t);
     }
     
-    public void allerGauche(boolean add){
+    public void allerGauche(boolean add, boolean dep){
         t = "Gauche";
         //System.out.println("Gauche");
         //System.out.println("mon x est de : "+ this.personnage_x);
-        if ( this.personnage_x-1 > -1 && this.plateau[personnage_x-1][personnage_y].isPeutMarcher() ){
+        if ( this.personnage_x-1 > -1 && this.plateau[personnage_x-1][personnage_y].isPeutMarcher() && dep ){
             //System.out.println("Gauche1");
             this.x = this.x - v+10;
             this.plateau[this.personnage_x][this.personnage_y].setJoueur(false);
@@ -252,19 +325,33 @@ public class JeuPersonnage implements JeuAbstract {
             if (this.x < 0)
                 this.x = 0+this.largeur_case;
             this.direction=2;
-            this.moveReussi(t);
+            this.moveReussi(t,dep);
+        }
+        else if ( this.personnage_x-1 > -1 && this.plateau[personnage_x-1][personnage_y].isPeutMarcher() && !dep ){
+            //System.out.println("Gauche1");
+            /*
+            this.x = this.x - v+10;
+            this.plateau[this.personnage_x][this.personnage_y].setJoueur(false);
+            this.personnage_x--;
+            this.plateau[this.personnage_x][this.personnage_y].setJoueur(true);
+            if (this.x < 0)
+            this.x = 0+this.largeur_case;
+            this.direction=2;
+            */
+            this.moveReussi(t,dep);
         }
         else{
             System.out.println("Je ne peux pas y aller");
             this.score = score-3;
         }
         if(add)
-        this.touche.add(t);
+            this.touche.add(t);
     }
     
-    public void moveReussi(String s){
+    public void moveReussi(String s, Boolean d){
         System.out.println(s);
-        this.print();
+        if (d)
+            this.print();
         this.score = score+10;
         this.bon_move++;
     }

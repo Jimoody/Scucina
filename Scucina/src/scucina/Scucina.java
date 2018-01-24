@@ -38,7 +38,7 @@ public class Scucina {
 		int fps=100;
                 // 600 x 400
 		int tailleX=314;
-		int tailleY=328;
+		int tailleY=428;
 		m.lancerJeu(tailleX, tailleY, fps);
     }
     
