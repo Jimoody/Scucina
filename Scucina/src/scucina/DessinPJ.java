@@ -17,6 +17,7 @@ public class DessinPJ implements DessinAbstract {
 		// charger sprites
 		Sprites.chargerImage("map-tuto1", "img/map_tuto1.png");
                 Sprites.chargerImage("personnage", "img/perso.png");
+                Sprites.chargerFeuille("perso", "img/trainer.png",3,4);
 	}
 
 	@Override
@@ -29,7 +30,17 @@ public class DessinPJ implements DessinAbstract {
                 int map_y = this.jeu.map_x;
 		g.setColor(Color.PINK);
 		Sprites.dessiner(g, "map-tuto1", map_x , map_y);
-                Sprites.dessinerCentre(g, "personnage", x, y);
+                String chaine="";
+			if (this.jeu.direction==0) // haut
+				chaine="perso_1_0";
+			if (this.jeu.direction==1) // bas
+				chaine="perso_1_3";
+			if (this.jeu.direction==2) // gauche
+				chaine="perso_1_1";
+			if (this.jeu.direction==3) // droite
+				chaine="perso_1_2";
+			
+                Sprites.dessinerCentre(g, chaine, x, y);
 
 		g.setColor(Color.BLACK);
 		//double vit=(int)(this.jeu.v*100)/100.;
