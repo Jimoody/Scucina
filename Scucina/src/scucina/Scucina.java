@@ -35,7 +35,7 @@ public class Scucina {
 		MoteurGraphique m=new MoteurGraphique(j, d);
 		
 		//on lance le moteur
-		int fps=30;
+		int fps=100;
                 // 600 x 400
 		int tailleX=314;
 		int tailleY=328;
