@@ -20,6 +20,8 @@ public class JeuTuto1 implements JeuAbstract{
     
         private Cases[][] plateau ;
         private Cases[][] portes;
+        private int personnage_x;
+        private int personnage_y;
 
     /**
 	 * affiche la souris
@@ -32,6 +34,8 @@ public class JeuTuto1 implements JeuAbstract{
 	 */
 	String mode="debut";
         public JeuTuto1() {
+                this.personnage_x = 4;
+                this.personnage_y = 1;
 		this.mode = "debut";
                 this.plateau = new Cases[6][6];
                 this.portes = new Cases[1][2];
@@ -80,10 +84,46 @@ public class JeuTuto1 implements JeuAbstract{
                 //this.portes[0][0].setPorte(true);
                 //this.portes[0][1]=this.plateau[4][4];
                 //this.portes[0][1].setPorte(true);
-                
+                this.plateau[this.personnage_x][this.personnage_y].setJoueur(true);
                 print();
         }
+        
+   	public void keyPressed(KeyEvent e) {
+		int chark = e.getKeyCode();
+                switch (chark) {
+                    case 38:
+                        if (plateau[personnage_x][personnage_y++].isPeutMarcher())
+                        this.setPersonnage_y(personnage_y++); //HAUT
+                    break;
+                    case 40:  if (plateau[personnage_x][personnage_y--].isPeutMarcher())
+                        this.setPersonnage_y(personnage_y--); // BAS
+                    break;
+                    case 37:  if (plateau[personnage_x--][personnage_y].isPeutMarcher())
+                        this.setPersonnage_x(personnage_x--); // GAUCHE
+                    break;
+                    case 39:  if (plateau[personnage_x++][personnage_y].isPeutMarcher())
+                        this.setPersonnage_x(personnage_x++); // DROITE
+                    break;
+                }   
+	}
 
+    public int getPersonnage_x() {
+        return personnage_x;
+    }
+
+    public void setPersonnage_x(int personnage_x) {
+        this.personnage_x = personnage_x;
+    }
+
+    public int getPersonnage_y() {
+        return personnage_y;
+    }
+
+    public void setPersonnage_y(int personnage_y) {
+        this.personnage_y = personnage_y;
+    }
+        
+        
     public Cases[][] getPlateau() {
         return plateau;
     }
@@ -133,7 +173,7 @@ public class JeuTuto1 implements JeuAbstract{
     }
         
 
-	@Override
+@Override
 	public String evoluer(CClavier clavier, CSouris souris) {
 		this.mode="debut";
 		// evoluer stocke la souris
@@ -147,18 +187,17 @@ public class JeuTuto1 implements JeuAbstract{
 		// si la souris est dans le carre
 		if ((sx > 100) && (sy > 100) && (sy < 200) && (sx < 400) && (souris.getClicked())) {
 			// on change de mode de jeu
-			System.out.println("passe en mode fin");
-			this.mode = "fin";
+			System.out.println("passe en mode PJ");
+			this.mode = "PJ";
+                        JeuPersonnage jp = new JeuPersonnage();
 		}
 
 		// si espace est une touche appuyee
 		if (clavier.getTyped(KeyEvent.VK_SPACE)) {
-			System.out.println("espace -> fin");
-			this.mode = "fin";
+			System.out.println("espace -> PJ");
+			this.mode = "PJ";
 		}
-		return (this.mode);
-
-	}
+		return (this.mode);}
 
 	@Override
 	public boolean etreFini() {

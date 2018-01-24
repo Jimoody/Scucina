@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * classe qui peut charger des images et les afficher
  * 
  * <pre>
- * Les images ne sont chargées qu'une fois. On doit leur donner un nom au
+ * Les images ne sont chargï¿½es qu'une fois. On doit leur donner un nom au
  * chargement
  * 
  * <pre>
@@ -38,7 +38,7 @@ public class Sprites {
 	 * @param nom
 	 *            nom de reference de l'image chargee
 	 * @param nomFichier
-	 *            nom du fichier à charger
+	 *            nom du fichier ï¿½ charger
 	 */
 	public static void chargerImage(String nom, String nomFichier) {
 		// verifie nom est disponible
@@ -50,7 +50,9 @@ public class Sprites {
 		try {
 			res = ImageIO.read(new File(nomFichier));
 		} catch (IOException e) {
+                    System.out.println(e.getMessage());
 			throw new Error("probleme de lecture de fichier " + nomFichier);
+                        
 		}
 
 		// ajoute l'image
@@ -61,17 +63,17 @@ public class Sprites {
 	 * methode de chargement d'une image.
 	 * 
 	 * <pre>
-	 * charge le morceau (x, y) -> (x+tx, y+ty) de l'image souhaitée nomFichier
+	 * charge le morceau (x, y) -> (x+tx, y+ty) de l'image souhaitï¿½e nomFichier
 	 * et lui attribue le nom nom
 	 * 
 	 * @param nom
 	 *            nom de reference de l'image chargee
 	 * @param nomFichier
-	 *            nom du fichier à charger
+	 *            nom du fichier ï¿½ charger
 	 * @param dx
-	 *            pos de départ
+	 *            pos de dï¿½part
 	 * @param dy
-	 *            pos de départ
+	 *            pos de dï¿½part
 	 * @param tx
 	 *            taille X
 	 * @param ty
@@ -100,7 +102,7 @@ public class Sprites {
 	}
 
 	/**
-	 * permet de charger une feuille de sprite réguliere à partir de la feuille
+	 * permet de charger une feuille de sprite rï¿½guliere ï¿½ partir de la feuille
 	 * et du nombre de ligne et de colonnes.
 	 * 
 	 * <pre>
@@ -169,7 +171,7 @@ public class Sprites {
 	}
 	
 	/**
-	 * permet de dessiner l'image de anière centree sur le graphics
+	 * permet de dessiner l'image de aniï¿½re centree sur le graphics
 	 * 
 	 * @param g
 	 *            graphics avec lequel dessiner

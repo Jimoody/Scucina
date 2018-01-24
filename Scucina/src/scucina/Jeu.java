@@ -27,8 +27,9 @@ public class Jeu {
 		
 		//on lance le moteur
 		int fps=100;
-		int tailleX=600;
-		int tailleY=400;
+                // 600 x 400
+		int tailleX=1000;
+		int tailleY=800;
 		m.lancerJeu(tailleX, tailleY, fps);
                 
 }

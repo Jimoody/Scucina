@@ -24,18 +24,21 @@ public class Scucina {
         // TODO code application logic here
         
            //on cree un jeu
-		JeuTuto1 j = new JeuTuto1();
+		//JeuTuto1 j = new JeuTuto1();
+                JeuPersonnage j = new JeuPersonnage();
 		
 		//on cree une interface graphique
-		DessinAbstract d=new DessinTuto1(j);	
+                    //DessinAbstract d=new DessinTuto1(j);	
+                    DessinAbstract d = new DessinPJ(j);
 				
 		//on cree le moteur et on lance le jeu
 		MoteurGraphique m=new MoteurGraphique(j, d);
 		
 		//on lance le moteur
 		int fps=100;
-		int tailleX=600;
-		int tailleY=400;
+                // 600 x 400
+		int tailleX=314;
+		int tailleY=328;
 		m.lancerJeu(tailleX, tailleY, fps);
     }
     

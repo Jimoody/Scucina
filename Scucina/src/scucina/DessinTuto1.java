@@ -7,7 +7,13 @@ package scucina;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import moteurJeu.moteur.DessinAbstract;
 
@@ -21,6 +27,8 @@ public class DessinTuto1 implements DessinAbstract {
     JeuTuto1 jeu;
     Cases[][] cases;
     String nom_img = "map_tuto1";
+    String chemin_map = "/img/map_tuto1.png";
+    
     
     public DessinTuto1(JeuTuto1 j) {
         this.jeu = j;
@@ -60,8 +68,8 @@ public class DessinTuto1 implements DessinAbstract {
                // fillRect(int x, int y, int width, int height)
                
         
-        //g.fillRect(100, 100, 300, 100);
-        g.fillRect(jeu.getPlateau()[1][1].getX(), jeu.getPlateau()[1][1].getY(), cases[1][1].getX(), cases[1][1].getY());
+        g.fillRect(100, 100, 300, 100);
+        //g.fillRect(jeu.getPlateau()[1][1].getX(), jeu.getPlateau()[1][1].getY(), cases[1][1].getX(), cases[1][1].getY());
         
         // on dessine les cercles au coin
         g.setColor(Color.BLUE);
@@ -80,6 +88,9 @@ public class DessinTuto1 implements DessinAbstract {
         g.drawString("Cliquez ici", 150, 155);
         g.dispose();
         
+        
+        
+        //jeu.print();
     }
     
     

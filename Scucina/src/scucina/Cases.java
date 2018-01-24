@@ -16,6 +16,7 @@ public class Cases {
     private boolean porte;
     private int x = 100;
     private int y = 100;
+    private boolean joueur;
 
     public int getX() {
         return x;
@@ -42,7 +43,16 @@ public class Cases {
             Outils o = new Outils(outils); 
             this.outils=o;
         }
+        this.joueur = false;
         
+    }
+
+    public boolean isJoueur() {
+        return joueur;
+    }
+
+    public void setJoueur(boolean joueur) {
+        this.joueur = joueur;
     }
 
     public boolean isPeutMarcher() {
@@ -71,14 +81,17 @@ public class Cases {
 
     @Override
     public String toString() {
-        if(this.porte ){
-            return "o";
+        if(this.joueur){
+            return "p";
         }
         else if(!this.peutMarcher){
             return "X";
         }
         else if(!this.porte){
             return " ";
+        }
+        else if(this.porte ){
+            return "o";
         }
         else {
             return "#";
