@@ -24,7 +24,7 @@ public class JeuTuto2 implements JeuAbstract{
     double v = 60;
     int largeur_case = 45;
     int hauteur_case = 50;
-    String mode="debut";
+    String mode="t2";
     int map_x;
     int map_y;
     int direction;
@@ -33,12 +33,12 @@ public class JeuTuto2 implements JeuAbstract{
     int bon_move = 0;
     int mauvaise_move;
     boolean lire=true;
-    int tps = 1000;
+    int tps = 750;
     Cases[][] plateau ;
     Cases[][] portes;
     int personnage_x;
     int personnage_y;
-    ArrayList<String> touche = new ArrayList<String>();
+    ArrayList<String> touche = new ArrayList<>();
     String t = "";
     
     boolean sequence = false;
@@ -50,7 +50,7 @@ public class JeuTuto2 implements JeuAbstract{
         x = (this.personnage_x) * this.largeur_case + this.largeur_case;
         y = (this.personnage_y) * this.hauteur_case + this.hauteur_case/2;
         
-        this.mode = "debut";
+        this.mode = "t2";
         this.plateau = new Cases[6][6];
         // plateau[x][y]
         // x = colonne
@@ -114,7 +114,7 @@ public class JeuTuto2 implements JeuAbstract{
     
     @Override
     public String evoluer(CClavier clavier, CSouris souris) {
-        this.mode="PJ";
+        this.mode="t2";
         
         // decale le personnage en fonction des touches
         if (clavier.getTyped(KeyEvent.VK_LEFT)) {
@@ -164,7 +164,7 @@ public class JeuTuto2 implements JeuAbstract{
             else sequence = false;
         }
         
-        return ("PJ");
+        return ("t2");
     }
     
     public void allerDroite(boolean add, boolean dep){

@@ -28,8 +28,8 @@ public class DessinTuto2 implements DessinAbstract {
     
     JeuTuto2 jeu;
     Cases[][] cases;
-    String nom_img = "map_tuto1";
-    String chemin_map = "/img/map_tuto1.png";
+    String nom_img = "map_tuto2";
+    String chemin_map = "/img/map_tuto2.png";
     int score, bm, mm;
     
     
@@ -37,10 +37,10 @@ public class DessinTuto2 implements DessinAbstract {
         this.jeu = j;
         this.cases= jeu.getPlateau();
         // charger sprites
-        Sprites.chargerImage("map-tuto1", "img/map_tuto1.png");
-        Sprites.chargerImage("personnage", "img/perso.png");
-        Sprites.chargerFeuille("perso", "img/trainer.png",3, 4);
-        Sprites.chargerFeuille("arrow", "img/arrows.png", 12, 8);
+//        Sprites.chargerImage("map-tuto1", "img/map_tuto1.png");
+//        Sprites.chargerImage("personnage", "img/perso.png");
+//        Sprites.chargerFeuille("perso", "img/trainer.png",3, 4);
+//        Sprites.chargerFeuille("arrow", "img/arrows.png", 12, 8);
         
     }
     
@@ -57,7 +57,7 @@ public class DessinTuto2 implements DessinAbstract {
         g.setColor(Color.BLACK);
         g.drawString("Score : " + String.valueOf(this.score), 320, 20);
         
-        Sprites.dessiner(g, "map-tuto1", map_x , map_y);
+        Sprites.dessiner(g, "map-tuto2", map_x , map_y);
         String chaine="";
         if (this.jeu.direction==0) // haut
             chaine="perso_1_0";

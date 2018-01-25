@@ -37,15 +37,17 @@ public class Jeu implements JeuAbstract {
     JeuMenu jm;
     JeuTuto1 jt1;
     JeuTuto2 jt2;
+    JeuIntro ji;
     
     /**
      * on creer un jeu au debut
      */
     public Jeu() {
-        this.mode = "Menu";
+        this.mode = "menu";
         this.jm = new JeuMenu();
         this.jt1 = new JeuTuto1();
         this.jt2 = new JeuTuto2();
+        this.ji = new JeuIntro();
         
     }
     
@@ -63,6 +65,10 @@ public class Jeu implements JeuAbstract {
                 
             case "t2":
                 this.mode = this.jt2.evoluer(controle, souris);
+                break;
+                
+            case "intro":
+                this.mode = this.ji.evoluer(controle, souris);
                 break;
         }
         return ("");

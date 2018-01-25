@@ -18,19 +18,18 @@ import moteurJeu.sprite.Sprites;
  *
  * @author vincentboulanger
  */
-public class DessinMenu implements DessinAbstract {
+public class DessinIntro implements DessinAbstract {
     
     
-    JeuMenu jeu;
+    JeuIntro jeu;
     Cases[][] cases;
-    String nom_img = "menu";
-    String chemin_map = "/img/menu1.png";
-    Bouton b1, b2;
+    String nom_img = "intro";
+    String chemin_map = "/img/intro.png";
+    Bouton b2;
     
     
-    public DessinMenu(JeuMenu j) {
+    public DessinIntro(JeuIntro j) {
         this.jeu = j;
-        this.b1 = jeu.b1;
         this.b2 = jeu.b2;
     }
     
@@ -39,21 +38,17 @@ public class DessinMenu implements DessinAbstract {
         // on recupere le graphics
         Graphics2D g=(Graphics2D)image.getGraphics();
         //g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
-        Sprites.dessiner(g, "menu", 0 , 0);
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.f));
+        Sprites.dessiner(g, "intro", 0 , 0);
+        //g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.f));
         /**
          * Récupéré bouton à partir de JeuMenu en attribut
          * --> Dessiner depuis les attributs des boutons !
          */
+        
         g.setColor(Color.white);
         g.setFont(new Font("helvetica", Font.PLAIN, 20)); 
-        //g.drawRect(b1.pos_x, b1.pos_y, b1.largeur, b1.hauteur);
-        g.drawString(b1.txt, b1.txtx, b1.txty);
-        
-        /*
-        g.drawRect(b2.pos_x, b2.pos_y, b2.largeur, b2.hauteur);
         g.drawString(b2.txt, b2.txtx, b2.txty);
-        */
+        
         
         g.dispose();
         

@@ -34,10 +34,12 @@ public class Scucina {
 		MoteurGraphique m=new MoteurGraphique(j, d);
 		
 		//on lance le moteur
-		int fps=100;
+		int fps=10;
                 // 600 x 400
-		int tailleX=414; //map = 314
-		int tailleY=528; //map = 428
+                // LARGEUR
+		int tailleX=600; //map = 314
+                // HAUTEUR
+		int tailleY=530; //map = 428
 		m.lancerJeu(tailleX, tailleY, fps);
     }
     

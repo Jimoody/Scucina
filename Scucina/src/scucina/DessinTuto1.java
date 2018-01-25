@@ -1,6 +1,7 @@
 package scucina;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -12,25 +13,31 @@ public class DessinTuto1 implements DessinAbstract {
     
     JeuTuto1 jeu;
     
+    int score;
     public DessinTuto1(JeuTuto1 j) {
         this.jeu = j;
         
         // charger sprites
-        Sprites.chargerImage("map-tuto1", "img/map_tuto1.png");
-        Sprites.chargerImage("personnage", "img/perso.png");
-        Sprites.chargerFeuille("perso", "img/trainer.png",3, 4);
-        Sprites.chargerFeuille("arrow", "img/arrows.png", 12, 8);
+//        Sprites.chargerImage("map-tuto1", "img/map_tuto1.png");
+//        Sprites.chargerImage("personnage", "img/perso.png");
+//        Sprites.chargerFeuille("perso", "img/trainer.png",3, 4);
+//        Sprites.chargerFeuille("arrow", "img/arrows.png", 12, 8);
     }
     
     @Override
     public void dessiner(BufferedImage image) {
         Graphics2D g=(Graphics2D)image.getGraphics();
-        
+        Bouton b1 = this.jeu.b1;
+        this.score = this.jeu.score;
         int x=(int)this.jeu.x;
         int y=(int)this.jeu.y;
         int map_x = this.jeu.map_x;
         int map_y = this.jeu.map_x;
         ArrayList<String> touche = this.jeu.touche;
+        
+        g.setColor(Color.BLACK);
+        g.drawString("Score : " + String.valueOf(this.score)+"\n\n Appuyez sur la touche ESPACE pour confirmer votre séquence"
+                + "\n\n OBJECTIF : \nRendez vous sur la case bleue", 320, 20);
         
         Sprites.dessiner(g, "map-tuto1", map_x , map_y);
         String chaine="";
@@ -46,6 +53,9 @@ public class DessinTuto1 implements DessinAbstract {
         Sprites.dessinerCentre(g, chaine, x, y);
         
         g.setColor(Color.BLACK);
+        g.setFont(new Font("helvetica", Font.PLAIN, 20));
+        if(this.jeu.ok())
+        g.drawString(b1.txt, b1.txtx, b1.txty);
         
         int img_x = 30;
         int img_y = 350;
@@ -90,7 +100,7 @@ public class DessinTuto1 implements DessinAbstract {
         }
         //g.drawString(this.jeu.touche.toString(), 10, 400);
         
-        int j = touche.size();
+
 //        for (int i = 0; i < j; i++) {
 //            String get = touche.get(i);
 //            switch (get) {
