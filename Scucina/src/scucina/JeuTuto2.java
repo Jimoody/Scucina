@@ -5,6 +5,7 @@
 */
 package scucina;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,10 +22,16 @@ import moteurJeu.moteur.JeuAbstract;
 public class JeuTuto2 implements JeuAbstract{
     
     double x, y;
+    
+    int sx, sy;
+    Color c = Color.RED;
     double v = 60;
     int largeur_case = 45;
     int hauteur_case = 50;
+    int objectifx = 1;
+    int objectify = 2;
     String mode="t2";
+    Bouton b1;
     int map_x;
     int map_y;
     int direction;
@@ -33,7 +40,8 @@ public class JeuTuto2 implements JeuAbstract{
     int bon_move = 0;
     int mauvaise_move;
     boolean lire=true;
-    int tps = 750;
+    boolean ok;
+    int tps = 400;
     Cases[][] plateau ;
     Cases[][] portes;
     int personnage_x;
@@ -41,12 +49,15 @@ public class JeuTuto2 implements JeuAbstract{
     ArrayList<String> touche = new ArrayList<>();
     String t = "";
     
+    boolean prendre_sel,poser_sel,prendre_patate, poser_patate;
+    
     boolean sequence = false;
     
     public JeuTuto2() {
         this.score = 100;
         this.personnage_x = 4;
         this.personnage_y = 4;
+        this.b1 = new Bouton(380, 300, 50, 70, "Fin");
         x = (this.personnage_x) * this.largeur_case + this.largeur_case;
         y = (this.personnage_y) * this.hauteur_case + this.hauteur_case/2;
         
@@ -162,9 +173,35 @@ public class JeuTuto2 implements JeuAbstract{
                 }
             }
             else sequence = false;
+            if(ok()){
+                try {
+                    Thread.sleep(tps*2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(JeuTuto1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.mode = "fin";
+                if ((sx > b1.pos_x) && (sy > b1.pos_y) && (sy < b1.pos_y+b1.hauteur) && (sx < b1.pos_x+b1.largeur) && (souris.getClicked())) {
+                    // on change de mode de jeu
+                    System.out.println("passer au second tutoriel");
+                    this.mode = "fin";
+                }
+            }
+            else{
+                this.mode = "t2";
+            }
         }
         
-        return ("t2");
+        return (this.mode);
+    }
+    public boolean ok(){
+        if(this.personnage_x==this.objectifx && this.personnage_y==this.objectify){
+            ok = true;
+            //System.out.println("GG");
+        }
+        else{
+            ok=false;
+        }
+        return ok;
     }
     
     public void allerDroite(boolean add, boolean dep){

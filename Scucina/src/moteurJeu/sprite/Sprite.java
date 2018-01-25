@@ -3,7 +3,7 @@ package moteurJeu.sprite;
 import java.awt.Graphics;
 
 /**
- * un sprite correspond à une image positionnée à un endroit de la scene
+ * un sprite correspond ï¿½ une image positionnï¿½e ï¿½ un endroit de la scene
  * 
  * @author vthomas
  *
@@ -11,7 +11,7 @@ import java.awt.Graphics;
 public class Sprite {
 
 	/**
-	 * le nom de l'image stockée dans Images
+	 * le nom de l'image stocke dans Images
 	 */
 	String nomImage;
 

@@ -38,6 +38,7 @@ public class Jeu implements JeuAbstract {
     JeuTuto1 jt1;
     JeuTuto2 jt2;
     JeuIntro ji;
+    JeuFin fin;
     
     /**
      * on creer un jeu au debut
@@ -48,6 +49,7 @@ public class Jeu implements JeuAbstract {
         this.jt1 = new JeuTuto1();
         this.jt2 = new JeuTuto2();
         this.ji = new JeuIntro();
+        this.fin = new JeuFin();
         
     }
     
@@ -69,6 +71,10 @@ public class Jeu implements JeuAbstract {
                 
             case "intro":
                 this.mode = this.ji.evoluer(controle, souris);
+                break;
+                
+            case "fin":
+                this.mode = this.fin.evoluer(controle, souris);
                 break;
         }
         return ("");

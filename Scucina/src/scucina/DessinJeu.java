@@ -21,6 +21,7 @@ public class DessinJeu implements DessinAbstract {
 	public DessinTuto1 dt1;
 	public DessinTuto2 dt2;
         public DessinIntro intro;
+        public DessinFin fin;
 
 	/**
 	 * constructeur
@@ -31,11 +32,13 @@ public class DessinJeu implements DessinAbstract {
 		this.dt1 = new DessinTuto1(this.jeu.jt1);
 		this.dt2 = new DessinTuto2(this.jeu.jt2);
                 this.intro = new DessinIntro(this.jeu.ji);
+                this.fin = new DessinFin(this.jeu.fin);
                 
         Sprites.chargerImage("map-tuto1", "img/map_tuto1.png");
         Sprites.chargerImage("map-tuto2", "img/map_tuto2.png");
         Sprites.chargerImage("menu", "img/menu1.png");
         Sprites.chargerImage("intro", "img/intro.png");
+        Sprites.chargerImage("fin", "img/fin.png");
         Sprites.chargerImage("personnage", "img/perso.png");
         Sprites.chargerFeuille("perso", "img/trainer.png",3, 4);
         Sprites.chargerFeuille("arrow", "img/arrows.png", 12, 8);
@@ -61,6 +64,9 @@ public class DessinJeu implements DessinAbstract {
                 }
                 if (this.jeu.mode.equals("intro")){
                     this.intro.dessiner(image);
+                }
+                if(this.jeu.mode.equals("fin")){
+                    this.fin.dessiner(image);
                 }
 
 	}

@@ -28,7 +28,7 @@ public class DessinTuto2 implements DessinAbstract {
     
     JeuTuto2 jeu;
     Cases[][] cases;
-    String nom_img = "map_tuto2";
+    String nom_img = "map-tuto2";
     String chemin_map = "/img/map_tuto2.png";
     int score, bm, mm;
     
@@ -41,7 +41,7 @@ public class DessinTuto2 implements DessinAbstract {
 //        Sprites.chargerImage("personnage", "img/perso.png");
 //        Sprites.chargerFeuille("perso", "img/trainer.png",3, 4);
 //        Sprites.chargerFeuille("arrow", "img/arrows.png", 12, 8);
-        
+
     }
     
     @Override
@@ -56,6 +56,12 @@ public class DessinTuto2 implements DessinAbstract {
         ArrayList<String> touche = this.jeu.touche;
         g.setColor(Color.BLACK);
         g.drawString("Score : " + String.valueOf(this.score), 320, 20);
+        g.drawString("Appuyez sur la touche ESPACE pour ", 320, 70);
+        g.drawString("confirmer votre séquence", 320, 80);
+        g.drawString("OBJECTIF : Rendez vous sur la case rose", 320, 150);
+        
+        g.drawString("Niveau incomplet", 320, 200);
+        g.drawString("Ajout d'action normalement", 320, 230);
         
         Sprites.dessiner(g, "map-tuto2", map_x , map_y);
         String chaine="";

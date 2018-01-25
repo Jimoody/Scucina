@@ -21,7 +21,6 @@ public class JeuTuto1 implements JeuAbstract {
     int objectifx = 1;
     int objectify = 2;
     double rayon = 50;
-    String mode="t1";
     int map_x;
     int map_y;
     int direction;
@@ -31,7 +30,8 @@ public class JeuTuto1 implements JeuAbstract {
     int mauvaise_move;
     boolean lire=true;
     boolean ok;
-    int tps = 750;
+    int tps = 400;
+    String mode;
     
     boolean sequence = false;
     /*
@@ -57,7 +57,6 @@ public class JeuTuto1 implements JeuAbstract {
         this.personnage_y = 1;
         x = (this.personnage_x) * this.largeur_case + this.largeur_case;
         y = (this.personnage_y) * this.hauteur_case + this.hauteur_case/2;
-        
         this.mode = "t1";
         this.plateau = new Cases[6][6];
         this.portes = new Cases[1][2];
@@ -123,8 +122,7 @@ public class JeuTuto1 implements JeuAbstract {
     
     @Override
     public String evoluer(CClavier clavier, CSouris souris) {
-        this.mode="t1";
-        
+        this.mode = "t1";
         // decale le personnage en fonction des touches
         if (clavier.getTyped(KeyEvent.VK_LEFT)) {
             this.allerGauche(true, false);
@@ -200,12 +198,20 @@ public class JeuTuto1 implements JeuAbstract {
             }
             else sequence = false;
             if(ok()){
-                
-                        if ((sx > b1.pos_x) && (sy > b1.pos_y) && (sy < b1.pos_y+b1.hauteur) && (sx < b1.pos_x+b1.largeur) && (souris.getClicked())) {
-			// on change de mode de jeu
-			System.out.println("passer au second tutoriel");
-			this.mode = "t2";
-		}
+                try {
+                    Thread.sleep(tps*2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(JeuTuto1.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.mode = "t2";
+                if ((sx > b1.pos_x) && (sy > b1.pos_y) && (sy < b1.pos_y+b1.hauteur) && (sx < b1.pos_x+b1.largeur) && (souris.getClicked())) {
+                    // on change de mode de jeu
+                    System.out.println("passer au second tutoriel");
+                    this.mode = "t2";
+                }
+            }
+            else{
+                this.mode = "t1";
             }
         }
         // si on arrive � la fin
@@ -219,14 +225,14 @@ public class JeuTuto1 implements JeuAbstract {
         return ("fin");
         }
         */
-        
-        return this.mode;
+        System.out.println(this.mode);
+        return (this.mode);
     }
     
     public boolean ok(){
         if(this.personnage_x==this.objectifx && this.personnage_y==this.objectify){
             ok = true;
-            System.out.println("GG");
+            //System.out.println("GG");
         }
         else{
             ok=false;

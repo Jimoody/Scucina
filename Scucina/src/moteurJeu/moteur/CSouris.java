@@ -20,7 +20,7 @@ public class CSouris extends MouseAdapter {
 	 */
 	public void mousePressed(MouseEvent arg0) {
 		this.appuye = true;
-		// on met click a true (declic à chaque iteration)
+		// on met click a true (declic  chaque iteration)
 		this.clicked = true;
 	}
 

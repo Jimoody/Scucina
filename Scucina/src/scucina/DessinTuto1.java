@@ -13,6 +13,8 @@ public class DessinTuto1 implements DessinAbstract {
     
     JeuTuto1 jeu;
     
+    String nom_img = "map-tuto1";
+    String chemin_map = "/img/map_tuto1.png";
     int score;
     public DessinTuto1(JeuTuto1 j) {
         this.jeu = j;
@@ -36,8 +38,10 @@ public class DessinTuto1 implements DessinAbstract {
         ArrayList<String> touche = this.jeu.touche;
         
         g.setColor(Color.BLACK);
-        g.drawString("Score : " + String.valueOf(this.score)+"\n\n Appuyez sur la touche ESPACE pour confirmer votre séquence"
-                + "\n\n OBJECTIF : \nRendez vous sur la case bleue", 320, 20);
+        g.drawString("Score : " + String.valueOf(this.score), 320, 20);
+        g.drawString("Appuyez sur la touche ESPACE pour ", 320, 70);
+        g.drawString("confirmer votre séquence", 320, 80);
+        g.drawString("OBJECTIF : Rendez vous sur la case bleue", 320, 150);
         
         Sprites.dessiner(g, "map-tuto1", map_x , map_y);
         String chaine="";
