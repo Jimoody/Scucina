@@ -123,6 +123,8 @@ public class JeuTuto1 implements JeuAbstract {
     @Override
     public String evoluer(CClavier clavier, CSouris souris) {
         this.mode = "t1";
+        this.sx = souris.getX();
+        this.sy = souris.getY();
         // decale le personnage en fonction des touches
         if (clavier.getTyped(KeyEvent.VK_LEFT)) {
             this.allerGauche(true, false);
@@ -196,24 +198,30 @@ public class JeuTuto1 implements JeuAbstract {
                     Logger.getLogger(JeuTuto1.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            else sequence = false;
-            if(ok()){
-                try {
-                    Thread.sleep(tps*2);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(JeuTuto1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.mode = "t2";
-                if ((sx > b1.pos_x) && (sy > b1.pos_y) && (sy < b1.pos_y+b1.hauteur) && (sx < b1.pos_x+b1.largeur) && (souris.getClicked())) {
-                    // on change de mode de jeu
-                    System.out.println("passer au second tutoriel");
-                    this.mode = "t2";
-                }
-            }
-            else{
-                this.mode = "t1";
+            else {
+                sequence = false;
             }
         }
+        
+        if(ok()){
+            /**
+             * try {
+             * Thread.sleep(tps*2);
+             * } catch (InterruptedException ex) {
+             * Logger.getLogger(JeuTuto1.class.getName()).log(Level.SEVERE, null, ex);
+             * }
+             */
+            //this.mode = "t2";
+            if ((sx > b1.pos_x) && (sy > b1.pos_y) && (sy < b1.pos_y+b1.hauteur) && (sx < b1.pos_x+b1.largeur) && (souris.getClicked())) {
+                // on change de mode de jeu
+                System.out.println("passer au second tutoriel");
+                this.mode = "t2";
+            }
+        }
+        else{
+            this.mode = "t1";
+        }
+        
         // si on arrive � la fin
         /*
         double dx = this.x - this.objectifx;
@@ -225,7 +233,7 @@ public class JeuTuto1 implements JeuAbstract {
         return ("fin");
         }
         */
-        System.out.println(this.mode);
+        //System.out.println(this.mode);
         return (this.mode);
     }
     
