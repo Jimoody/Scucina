@@ -39,6 +39,8 @@ public class DessinJeu implements DessinAbstract {
         Sprites.chargerImage("menu", "img/menu1.png");
         Sprites.chargerImage("intro", "img/intro.png");
         Sprites.chargerImage("fin", "img/fin.png");
+        Sprites.chargerImage("next", "img/next.png");
+        Sprites.chargerImage("next1", "img/next1.png");
         Sprites.chargerImage("personnage", "img/perso.png");
         Sprites.chargerFeuille("perso", "img/trainer.png",3, 4);
         Sprites.chargerFeuille("arrow", "img/arrows.png", 12, 8);

@@ -29,7 +29,9 @@ public class DessinTuto2 implements DessinAbstract {
     JeuTuto2 jeu;
     Cases[][] cases;
     String nom_img = "map-tuto2";
+    String fleche = "next1";
     String chemin_map = "/img/map_tuto2.png";
+    String chemin_next = "/img/next1.png";
     int score, bm, mm;
     
     
@@ -54,16 +56,11 @@ public class DessinTuto2 implements DessinAbstract {
         int map_x = this.jeu.map_x;
         int map_y = this.jeu.map_x;
         ArrayList<String> touche = this.jeu.touche;
-        g.setColor(Color.BLACK);
-        g.drawString("Score : " + String.valueOf(this.score), 320, 20);
-        g.drawString("Appuyez sur la touche ESPACE pour ", 320, 70);
-        g.drawString("confirmer votre séquence", 320, 80);
-        g.drawString("OBJECTIF : Rendez vous sur la case rose", 320, 150);
         
-        g.drawString("Niveau incomplet", 320, 200);
-        g.drawString("Ajout d'action normalement", 320, 230);
         
         Sprites.dessiner(g, "map-tuto2", map_x , map_y);
+        g.setColor(Color.WHITE);
+        g.drawString("Score : " + String.valueOf(this.score), 320, 20);
         String chaine="";
         if (this.jeu.direction==0) // haut
             chaine="perso_1_0";
@@ -76,9 +73,11 @@ public class DessinTuto2 implements DessinAbstract {
         
         Sprites.dessinerCentre(g, chaine, x, y+20);
         
+        if(this.jeu.ok())
+        Sprites.dessinerCentre(g, "next1", 525, 450);
         
         int img_x = 30;
-        int img_y = 350;
+        int img_y = 360;
         int a = 0;
         boolean ligne = true;
         boolean ligne1 = true;
@@ -118,6 +117,7 @@ public class DessinTuto2 implements DessinAbstract {
                 }
             }
         }
+        
         
         g.dispose();
         

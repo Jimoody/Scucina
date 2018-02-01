@@ -212,7 +212,7 @@ public class JeuTuto1 implements JeuAbstract {
              * }
              */
             //this.mode = "t2";
-            if ((sx > b1.pos_x) && (sy > b1.pos_y) && (sy < b1.pos_y+b1.hauteur) && (sx < b1.pos_x+b1.largeur) && (souris.getClicked())) {
+            if ((sx > 380) && (sy > 430) && (sy < 525) && (sx < 600) && (souris.getClicked())) {
                 // on change de mode de jeu
                 System.out.println("passer au second tutoriel");
                 this.mode = "t2";

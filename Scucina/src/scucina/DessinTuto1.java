@@ -14,6 +14,8 @@ public class DessinTuto1 implements DessinAbstract {
     JeuTuto1 jeu;
     
     String nom_img = "map-tuto1";
+    String fleche = "next";
+    String chemin_fleche = "/img/next.png";
     String chemin_map = "/img/map_tuto1.png";
     int score;
     public DessinTuto1(JeuTuto1 j) {
@@ -37,13 +39,11 @@ public class DessinTuto1 implements DessinAbstract {
         int map_y = this.jeu.map_x;
         ArrayList<String> touche = this.jeu.touche;
         
-        g.setColor(Color.BLACK);
-        g.drawString("Score : " + String.valueOf(this.score), 320, 20);
-        g.drawString("Appuyez sur la touche ESPACE pour ", 320, 70);
-        g.drawString("confirmer votre séquence", 320, 80);
-        g.drawString("OBJECTIF : Rendez vous sur la case bleue", 320, 150);
         
-        Sprites.dessiner(g, "map-tuto1", map_x , map_y);
+       
+        
+        Sprites.dessiner(g, "map-tuto1", map_x , map_y);g.setColor(Color.WHITE);
+        g.drawString("Score : " + String.valueOf(this.score), 320, 20);
         String chaine="";
         if (this.jeu.direction==0) // haut
             chaine="perso_1_0";
@@ -59,10 +59,10 @@ public class DessinTuto1 implements DessinAbstract {
         g.setColor(Color.BLACK);
         g.setFont(new Font("helvetica", Font.PLAIN, 20));
         if(this.jeu.ok())
-        g.drawString(b1.txt, b1.txtx, b1.txty);
+        Sprites.dessinerCentre(g, "next", 525, 450);
         
         int img_x = 30;
-        int img_y = 350;
+        int img_y = 360;
         int a = 0;
         boolean ligne = true;
         boolean ligne1 = true;

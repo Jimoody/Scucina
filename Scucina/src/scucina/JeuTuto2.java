@@ -126,6 +126,8 @@ public class JeuTuto2 implements JeuAbstract{
     @Override
     public String evoluer(CClavier clavier, CSouris souris) {
         this.mode="t2";
+        this.sx = souris.getX();
+        this.sy = souris.getY();
         
         // decale le personnage en fonction des touches
         if (clavier.getTyped(KeyEvent.VK_LEFT)) {
@@ -173,23 +175,17 @@ public class JeuTuto2 implements JeuAbstract{
                 }
             }
             else sequence = false;
+        }
             if(ok()){
-                try {
-                    Thread.sleep(tps*2);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(JeuTuto1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.mode = "fin";
-                if ((sx > b1.pos_x) && (sy > b1.pos_y) && (sy < b1.pos_y+b1.hauteur) && (sx < b1.pos_x+b1.largeur) && (souris.getClicked())) {
-                    // on change de mode de jeu
-                    System.out.println("passer au second tutoriel");
+                if ((sx > 380) && (sy > 430) && (sy < 525) && (sx < 600) && (souris.getClicked())) {
+                // on change de mode de jeu
+                System.out.println("passer à la fin");
                     this.mode = "fin";
                 }
             }
             else{
                 this.mode = "t2";
             }
-        }
         
         return (this.mode);
     }
